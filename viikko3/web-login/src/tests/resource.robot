@@ -49,4 +49,3 @@ Welcome Page Should Be Open
 
 Click Logout Link
     Click Link  Logout
-
