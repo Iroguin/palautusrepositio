@@ -110,7 +110,6 @@ class TestKauppa(unittest.TestCase):
         self.kauppa.poista_korista(1)
         self.kauppa.tilimaksu("pekka", "12345")
 
-        # varmistetaan että korissa on vain leipä (3€)
         self.pankki_mock.tilisiirto.assert_called_with(ANY, ANY, ANY, ANY, 3)
 
     def test_tuotteen_nimi_ja_hinta_toimii(self):
@@ -149,7 +148,6 @@ class TestKauppa(unittest.TestCase):
         self.assertNotEqual(tuote1, tuote3)
         
     def test_varasto_tuote_loytyi(self):
-        # Käytetään oikeaa Varastoa mockin sijaan
         from varasto import Varasto
         from kirjanpito import Kirjanpito
         
@@ -198,14 +196,12 @@ class TestKauppa(unittest.TestCase):
         kirjanpito = Kirjanpito()
         varasto = Varasto(kirjanpito)
         
-        # Tarkistetaan kaikkien alustettujen tuotteiden saldot
-        self.assertEqual(varasto.saldo(1), 100)  # Koff Portteri
-        self.assertEqual(varasto.saldo(2), 25)   # Fink Bräu I
-        self.assertEqual(varasto.saldo(3), 30)   # Sierra Nevada Pale Ale
-        self.assertEqual(varasto.saldo(4), 40)   # Mikkeller
-        self.assertEqual(varasto.saldo(5), 15)   # Weihenstephaner
+        self.assertEqual(varasto.saldo(1), 100)
+        self.assertEqual(varasto.saldo(2), 25)
+        self.assertEqual(varasto.saldo(3), 30)
+        self.assertEqual(varasto.saldo(4), 40)
+        self.assertEqual(varasto.saldo(5), 15)
         
-        # Tarkistetaan muutaman tuotteen tiedot
         tuote = varasto.hae_tuote(2)
         self.assertEqual(tuote.nimi, "Fink Bräu I")
         self.assertEqual(tuote.hinta, 1)
